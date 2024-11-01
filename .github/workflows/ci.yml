@@ -7,18 +7,24 @@ on:
 
 jobs:
   test:
+    name: Run tests and collect coverage
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version: '16'  # Use the Node.js version your project requires
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
 
       - name: Install dependencies
         run: npm install
 
       - name: Run tests
-        run: npm test
+        run: npm run test:coverage
+
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
