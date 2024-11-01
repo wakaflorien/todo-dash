@@ -1,0 +1,12 @@
+{
+    "navigation": {
+      "home": "accueil",
+      "about": "À propos",
+      "contact": "contact"
+    },
+    "buttons": {
+      "submit": "soumettre",
+      "cancel": "annuler",
+      "save": "enregistrer"
+    }
+  }

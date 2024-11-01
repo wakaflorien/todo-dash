@@ -1,0 +1,12 @@
+{
+    "navigation": {
+        "home": "home",
+        "about": "about",
+        "contact": "contact"
+    },
+    "buttons": {
+        "submit": "submit",
+        "cancel": "cancel",
+        "save": "save"
+    }
+}
