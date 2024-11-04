@@ -1,20 +1,21 @@
-# Simple todo-dash
+# Simple todo app dashboard
 
 Single page manage daily todo dashboard UI/UX
 
-### Prerequisites
+## **Prerequisites**
 
 - Node.js (v18.0.0 or higher)
 - npm (v9.0.0 or higher) or yarn (v1.22.0 or higher)
 - Git
 
-### Installation
+## **Installation**
 
 1. Clone the repository
 
-`git clone https://github.com/your-username/project-name.git
-cd project-name
-`
+`git clone [https://github.com/your-username/project-name.git](https://github.com/wakaflorien/todo-dash.git)`
+
+`cd project-name`
+
 
 2. Install dependencies
 
@@ -24,15 +25,15 @@ or
 
 `yarn install`
 
-### Development Server
+## **Development Server**
 
 Start the development server on http://localhost:3000
 
-`npm run dev`
+`npm run start`
 
-`yarn dev`
+`yarn start`
 
-### Unit Tests
+## **Unit Tests**
 
 Run unit tests using Jest and React Testing Library
 
@@ -42,7 +43,7 @@ or
 
 `yarn test`
 
-### Generate test coverage report
+## **Generate test coverage report**
 
 `npm run test:coverage`
 
@@ -50,7 +51,7 @@ or
 
 `yarn test:coverage`
 
-### Run end-to-end tests using Cypress
+## **Run end-to-end tests using Cypress**
 
 `npm run test:e2e`
 
