@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  @variants responsive {
+      .masonry {
+          column-gap: 1.5em;
+          column-count: 1;
+      }
+      .masonry-sm {
+          column-gap: 1.5em;
+          column-count: 2;
+      }
+      .masonry-md {
+          column-gap: 1.5em;
+          column-count: 4;
+      }
+      .masonry-lg {
+          column-gap: 1.5em;
+          column-count: 6;
+      }
+      .break-inside {
+          break-inside: avoid;
+      }
+
+  }
+}
+@layer components {
+  .nav-icon {
+    @apply size-4 text-secondary hover:text-tertiary !cursor-pointer;
+  }
+
+  .solid-icon {
+    @apply size-2 w-8 h-8 text-tertiary hover:text-secondary !cursor-pointer;
+  }
+
+  .nav-icon-add {
+    @apply size-4 w-8 h-8 text-secondary hover:text-tertiary !cursor-pointer border border-dashed rounded-full;
+  }
+
+  .border-night {
+    @apply border-primary/20;
+  }
+
+  .bg-night {
+    @apply bg-slate-800;
+  }
+
+  .completedTask {
+    @apply bg-green-200/20 border-none text-green-700 text-xs p-1.5 rounded-md capitalize cursor-pointer !important
+  }
+
+  .activeTask {
+    @apply bg-blue-200/20 border-none text-blue-700 text-xs p-1.5 rounded-md capitalize cursor-pointer !important
+  }
+  .pendingTask {
+    @apply bg-orange-200/20 border-none text-orange-700 text-xs p-1.5 rounded-md capitalize cursor-pointer !important
+  }
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}
