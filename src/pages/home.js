@@ -119,15 +119,20 @@ const Home = () => {
   const allTasks = todos.todos ? transformTodos(todos.todos) : [];
 
   const breadCrumbsItems = [
-    { id: 1, name: "Workspace", href: "#", active: false },
-    { id: 2, name: "Creative", href: "#", active: false },
-    { id: 3, name: "Creative website", href: "#", active: true },
+    { id: 1, name: `${t("breadcrumbs.workspace")}`, href: "#", active: false },
+    { id: 2, name: `${t("breadcrumbs.creative")}`, href: "#", active: false },
+    {
+      id: 3,
+      name: `${t("breadcrumbs.creativedesign")}`,
+      href: "#",
+      active: true,
+    },
   ];
 
   const tabsItems = [
     {
       id: 1,
-      name: "All Tasks",
+      name: `${t("tabs.alltasks")}`,
       current: true,
       tasksCount: totalTasks,
       content: (
@@ -144,7 +149,7 @@ const Home = () => {
     },
     {
       id: 2,
-      name: "Todo",
+      name: `${t("tabs.todo")}`,
       current: false,
       tasksCount: totalActiveTasks,
       content: (
@@ -163,7 +168,7 @@ const Home = () => {
     },
     {
       id: 3,
-      name: "In progress",
+      name: `${t("tabs.inprogress")}`,
       current: false,
       tasksCount: totalActiveTasks,
       content: (
@@ -184,7 +189,7 @@ const Home = () => {
     },
     {
       id: 4,
-      name: "Completed",
+      name: `${t("tabs.completed")}`,
       current: false,
       tasksCount: totalCompletedTasks,
       content: (
@@ -228,8 +233,16 @@ const Home = () => {
       >
         <div className="w-full">
           {/* Header */}
-          <div className={`flex gap-2 p-2 lg:p-4 justify-between w-full md:w-[calc(100%-300px)]  ${ currentTheme === "light" ? "bg-white" : "bg-night"}`}>
-            <div className={`flex w-full items-center gap-2 ${ currentTheme === "light" ? "bg-content-bg" : "bg-primary/20"}  rounded-md`} >
+          <div
+            className={`flex gap-2 p-2 lg:p-4 justify-between w-full md:w-[calc(100%-300px)]  ${
+              currentTheme === "light" ? "bg-white" : "bg-night"
+            }`}
+          >
+            <div
+              className={`flex w-full items-center gap-2 ${
+                currentTheme === "light" ? "bg-content-bg" : "bg-primary/20"
+              }  rounded-md`}
+            >
               <input
                 type="search"
                 placeholder="Search"
@@ -278,12 +291,14 @@ const Home = () => {
                   ))}
                 </div>
                 <div className="flex flex-col items-end">
-                  <p className="capitalize text-xs md:text-md">From 23 april</p>
-                  <p className="relative capitalize text-secondary">
+                  <p className="capitalize text-xs md:text-md">
+                    {t("breadcrumbs.from")} 23 {t("months.april")} 7
+                  </p>
+                  <p className="relative text-secondary">
                     {" "}
                     <span className="absolute -left-4 bottom-1.5 w-2 h-2 bg-green-500 rounded-full"></span>{" "}
                     <span className="text-xs md:text-md">
-                      updated 12 min ago
+                      {t("breadcrumbs.updated")} 12 min {t("breadcrumbs.ago")}
                     </span>
                   </p>
                 </div>
@@ -291,7 +306,7 @@ const Home = () => {
 
               {/* Title */}
               <header className="capitalize font-semibold text-lg md:text-2xl">
-                Website design
+                {t("titles.website")}
               </header>
 
               {/* Actions */}
@@ -299,8 +314,8 @@ const Home = () => {
                 <div className="flex gap-2 divide-x divide-solid">
                   <div className="flex gap-2 items-center">
                     <LockOpenIcon className="nav-icon" />
-                    <span className="text-secondary text-xs md:text-sm">
-                      Limited access
+                    <span className="text-secondary text-xs md:text-sm capitalize">
+                      {t("actions.limited")}
                     </span>
                     <ChevronDownIcon className="nav-icon" />
                   </div>
@@ -338,7 +353,7 @@ const Home = () => {
                       `}
                     onClick={() => setActiveTab(item.id)}
                   >
-                    <p>{item.name}</p>
+                    <p className="capitalize">{item.name}</p>
                     <span className="text-xs p-1 bg-content-bg text-secondary rounded-md cursor-pointer">
                       {item.tasksCount}
                     </span>
@@ -348,12 +363,12 @@ const Home = () => {
                 <div className="hidden sm:flex  sm:flex-col lg:flex-row gap-2">
                   <SecondaryButton
                     icon={<AdjustmentsHorizontalIcon className="nav-icon" />}
-                    text="Filter & Sort"
+                    text={t("tabs.filter")}
                     onClick={() => {}}
                   />
                   <SecondaryButton
                     icon={<PlusIcon className="nav-icon" />}
-                    text="New Task"
+                    text={t("tabs.newtask")}
                     onClick={() => setIsOpen(!isOpen)}
                   />
                 </div>
@@ -406,19 +421,9 @@ const Home = () => {
               </form>
             </Modal>
           </div>
-
-          {/* <nav>
-                <ul className="flex gap-4">
-                  <li>{t("navigation.home")}</li>
-                  <li>{t("navigation.about")}</li>
-                  <li>{t("navigation.contact")}</li>
-                </ul>
-
-              </nav>
-     */}
         </div>
 
-        <RightSidePanel currentTheme={currentTheme} />
+        {/* <RightSidePanel currentTheme={currentTheme} /> */}
       </section>
     </main>
   );

@@ -1,12 +1,43 @@
 {
-    "navigation": {
-      "home": "accueil",
-      "about": "À propos",
-      "contact": "contact"
-    },
-    "buttons": {
-      "submit": "soumettre",
-      "cancel": "annuler",
-      "save": "enregistrer"
-    }
+  "breadcrumbs": {
+    "workspace": "espace de travail",
+    "creative": "créative",
+    "creativedesign": "conception créative",
+    "from": "depuis",
+    "updated": "Mis à jour",
+    "ago": "il y a"
+  },
+  "titles": {
+    "website": "conception de site web"
+  },
+  "actions": {
+    "limited": "accès limité"
+  },
+  "tabs": {
+    "alltasks": "toutes les tâches",
+    "completed": "complété",
+    "inprogress": "en cours",
+    "todo": "faire",
+    "filter": "Filtrer & trier",
+    "newtask": "Nouvelle tâche"
+  },
+  "months": {
+    "april": "avril",
+    "may": "mai"
+  },
+  "overview": {
+    "project": "aperçu du projet",
+    "seeall": "voir tout",
+    "timeline": "chronologie",
+    "team": "équipe",
+    "status": "statut",
+    "teamchat": "discussion en équipe",
+    "message": "bonne semaine de travail !",
+    "recording": "enregistrement"
+  },
+  "buttons": {
+    "submit": "soumettre",
+    "cancel": "annuler",
+    "save": "enregistrer"
   }
+}

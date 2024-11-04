@@ -12,12 +12,12 @@ Single page manage daily todo dashboard UI/UX
 
 1. Clone the repository
 
-`git clone [https://github.com/your-username/project-name.git](https://github.com/wakaflorien/todo-dash.git)`
+`git clone https://github.com/wakaflorien/todo-dash.git`
 
 `cd project-name`
 
 
-2. Install dependencies
+1. Install dependencies
 
 `npm install`
 
@@ -30,6 +30,8 @@ or
 Start the development server on http://localhost:3000
 
 `npm run start`
+
+or
 
 `yarn start`
 

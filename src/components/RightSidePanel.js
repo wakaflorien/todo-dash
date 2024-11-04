@@ -1,26 +1,42 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ProjectSummary from "./ProjectSummary";
-import { EllipsisVerticalIcon, MicrophoneIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import {
+  EllipsisVerticalIcon,
+  MicrophoneIcon,
+  PaperAirplaneIcon,
+} from "@heroicons/react/24/outline";
 import Message from "./Message";
 import Reply from "./Reply";
 
 function RightSidePanel(props) {
+  const { t } = useTranslation();
   return (
-    <div className={`${props.currentTheme === "light" ? "bg-white border-l" : "bg-night border-l border-night"} w-[300px] h-content sm:h-screen  shadow-sm p-4 space-y-4 absolute right-0 z-50 hidden md:block`}>
+    <div
+      className={`${
+        props.currentTheme === "light"
+          ? "bg-white border-l"
+          : "bg-night border-l border-night"
+      } w-[300px] h-content sm:h-screen  shadow-sm p-4 space-y-4 absolute right-0 z-50 hidden md:block`}
+    >
       {/* Right sidebar panel */}
       <div className="flex flex-col gap-4">
         <header className="flex justify-between gap-4 capitalize text-sm">
-          <span className="text-primary">project overview</span>
-          <span className="text-secondary cursor-pointer">see all</span>
+          <span className="text-primary">{t("overview.project")}</span>
+          <span className="text-secondary cursor-pointer">{t("overview.seeall")}</span>
         </header>
 
         <ProjectSummary currentTheme={props.currentTheme} />
 
-        <div className={`${props.currentTheme === "light" ? "bg-white" : "bg-primary/20"} relative space-y-4 rounded-md`}>
+        <div
+          className={`${
+            props.currentTheme === "light" ? "bg-white" : "bg-primary/20"
+          } relative space-y-4 rounded-md`}
+        >
           <header className="bg-white w-full sticky top-0 flex justify-between p-4 capitalize text-sm shadow-sm rounded-t-md">
             <div className="space-x-2">
-              <span className="text-primary">teamChat</span>
-              <small className="text-secondary">24 april 2023</small>
+              <span className="text-primary">{t("overview.teamchat")}</span>
+              <small className="text-secondary">24 {t("months.april")} 2023</small>
             </div>
             <EllipsisVerticalIcon className="nav-icon" />
           </header>

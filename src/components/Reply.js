@@ -1,8 +1,10 @@
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import Tooltip from "./Tooltip";
+import { useTranslation } from "react-i18next";
 
 function Reply(props) {
+  const { t } = useTranslation();
   return (
     <div className="flex gap-2">
       <div className="rounded-md w-full">
@@ -15,11 +17,11 @@ function Reply(props) {
         <div className="p-2 rounded-md bg-content-bg flex justify-between items-center">
           {props.messageType === "message" && (
             <p className={`text-xs truncate w-full `}>
-              Thanks for the feedback! i will get back to you
+              {t("overview.message")}
             </p>
           )}
           {props.messageType === "recording" && (
-            <p className={`text-xs  w-full `}>Thanks for the feedback</p>
+            <p className={`text-xs  w-full `}>{t("overview.recording")}</p>
           )}
           {props.hasInfo && (
             <Tooltip text="Report !" position="top">

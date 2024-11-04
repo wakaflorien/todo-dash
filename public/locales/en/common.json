@@ -1,8 +1,39 @@
 {
-    "navigation": {
-        "home": "home",
-        "about": "about",
-        "contact": "contact"
+    "breadcrumbs": {
+        "workspace": "Workspace",
+        "creative": "creative",
+        "creativedesign": "Creative Design",
+        "from": "from",
+        "updated": "Updated",
+        "ago": "ago"
+    },
+    "titles": {
+        "website": "website design"
+    },
+    "actions": {
+        "limited": "limited access"
+    },
+    "tabs": {
+        "alltasks": "all tasks",
+        "completed": "completed",
+        "inprogress": "in progress",
+        "todo": "to do",
+        "filter": "Filter & sort",
+        "newtask": "New task"
+    },
+    "months": {
+        "april": "april",
+        "may": "may"
+    },
+    "overview": {
+        "project": "project overview",
+        "seeall": "see all",
+        "timeline": "timeline",
+        "team": "team",
+        "status": "status",
+        "teamchat": "team chat",
+        "message": "have a great working week!",
+        "recording": "recording"
     },
     "buttons": {
         "submit": "submit",

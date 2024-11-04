@@ -6,20 +6,33 @@ import {
 import React from "react";
 
 import UserGroupBlend from "./UserGroupBlend";
+import { useTranslation } from "react-i18next";
 
 function ProjectSummary(props) {
+  const { t } = useTranslation();
   return (
-    <div className={`w-full ${props.currentTheme === "light" ? "bg-content-bg" : "bg-primary/20"} p-4 space-y-4 rounded-md`}>
+    <div
+      className={`w-full ${
+        props.currentTheme === "light" ? "bg-content-bg" : "bg-primary/20"
+      } p-4 space-y-4 rounded-md`}
+    >
       <div className="flex gap-4">
         <CalendarDateRangeIcon className="nav-icon" />
-        <span className="text-xs text-secondary capitalize"> timeline</span>
-        <span className="text-xs text-primary"> April 23 - May 7</span>
+        <span className="text-xs text-secondary capitalize">
+          {t("overview.timeline")}
+        </span>
+        <span className="text-xs text-primary">
+          {" "}
+          {t("months.april")} 23 - {t("months.may")} 7
+        </span>
       </div>
 
       <div className="flex justify-start items-center gap-4">
         <div className="flex gap-4">
           <UserGroupIcon className="nav-icon" />
-          <span className="text-xs text-secondary capitalize"> team</span>
+          <span className="text-xs text-secondary capitalize">
+            {t("overview.team")}
+          </span>
         </div>
 
         <UserGroupBlend hasAdd={false} hasMore={false} />
@@ -27,8 +40,12 @@ function ProjectSummary(props) {
 
       <div className="flex gap-4">
         <StarIcon className="nav-icon" />
-        <span className="text-xs text-secondary capitalize"> status</span>
-        <span className="text-xs text-primary capitalize"> in progress</span>
+        <span className="text-xs text-secondary capitalize">
+          {t("overview.status")}
+        </span>
+        <span className="text-xs text-primary capitalize">
+          {t("tabs.inprogress")}
+        </span>
       </div>
     </div>
   );
