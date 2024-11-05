@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 function Reply(props) {
   const { t } = useTranslation();
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 p-2 md:p-4">
       <div className="rounded-md w-full">
         <div className={`flex gap-2 items-center justify-end`}>
           <p className="font-semibold text-sm/6">Allure Malika</p>
@@ -14,7 +14,9 @@ function Reply(props) {
             <time>12:30</time>PM
           </p>
         </div>
-        <div className="p-2 rounded-md bg-content-bg flex justify-between items-center">
+        <div className={`p-2 md:p-3 rounded-md flex justify-between items-center ${
+            props.currentTheme === "light" ? "bg-content-bg " : "bg-primary/20"
+          }`}>
           {props.messageType === "message" && (
             <p className={`text-xs truncate w-full `}>
               {t("overview.message")}

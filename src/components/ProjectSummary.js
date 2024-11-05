@@ -18,10 +18,14 @@ function ProjectSummary(props) {
     >
       <div className="flex gap-4">
         <CalendarDateRangeIcon className="nav-icon" />
-        <span className="text-xs text-secondary capitalize">
+        <span className="text-xs text-secondary font-semibold capitalize">
           {t("overview.timeline")}
         </span>
-        <span className="text-xs text-primary">
+        <span
+          className={`text-xs capitalize ${
+            props.currentTheme === "light" ? "text-primary" : "text-white"
+          }`}
+        >
           {" "}
           {t("months.april")} 23 - {t("months.may")} 7
         </span>
@@ -30,7 +34,7 @@ function ProjectSummary(props) {
       <div className="flex justify-start items-center gap-4">
         <div className="flex gap-4">
           <UserGroupIcon className="nav-icon" />
-          <span className="text-xs text-secondary capitalize">
+          <span className="text-xs text-secondary font-semibold capitalize">
             {t("overview.team")}
           </span>
         </div>
@@ -40,10 +44,14 @@ function ProjectSummary(props) {
 
       <div className="flex gap-4">
         <StarIcon className="nav-icon" />
-        <span className="text-xs text-secondary capitalize">
+        <span className={`text-xs text-secondary font-semibold capitalize`}>
           {t("overview.status")}
         </span>
-        <span className="text-xs text-primary capitalize">
+        <span
+          className={`text-xs capitalize ${
+            props.currentTheme === "light" ? "text-primary" : "text-white"
+          }`}
+        >
           {t("tabs.inprogress")}
         </span>
       </div>

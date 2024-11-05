@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function Tooltip({ text, position = "top", children, className = "" }) {
-  const [isVisible, setIsVisible] = useState(false);
+function Tooltip({ text, position = "top", children, className = "", open = false }) {
+  const [isVisible, setIsVisible] = useState(open);
 
   const positions = {
     top: "bottom-full -left-4 -translate-x-1/2 mb-2",

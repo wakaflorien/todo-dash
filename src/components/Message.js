@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 function Message(props) {
   const { t } = useTranslation();
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 p-2 md:p-4">
       <div className="w-8 h-8 rounded-full">
         <img
           src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
@@ -22,16 +22,18 @@ function Message(props) {
             <time>12:30</time>PM
           </p>
         </div>
-        <div className="p-2 rounded-md bg-content-bg flex justify-between items-center">
+        <div
+          className={`p-2 md:p-3 rounded-md  flex justify-between items-center ${
+            props.currentTheme === "light" ? "bg-content-bg " : "bg-primary/20"
+          }`}
+        >
           {props.messageType === "message" && (
             <p className={`text-xs truncate w-full `}>
               {t("overview.message")}
             </p>
           )}
           {props.messageType === "recording" && (
-            <p className={`text-xs  w-full `}>
-              {t("overview.recording")}
-            </p>
+            <p className={`text-xs  w-full `}>{t("overview.recording")}</p>
           )}
 
           {props.hasInfo && (

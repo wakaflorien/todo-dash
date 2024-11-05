@@ -44,6 +44,7 @@ const Home = () => {
   const [currentTheme, setCurrentTheme] = useState("light");
   const [activeTab, setActiveTab] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+  const [showRightPanel, setShowRightPanel] = useState(false);
 
   const transformTodos = (todos) => {
     if (!todos) return [];
@@ -110,7 +111,6 @@ const Home = () => {
     addTodoMutation.mutate(formData);
   };
 
-  console.log(todos);
   const totalTasks = todos ? todos.limit : 0;
   const totalCompletedTasks = todos.todos
     ? todos.todos.filter((todo) => todo.completed).length
@@ -207,9 +207,9 @@ const Home = () => {
         <div className="w-full">
           {/* Header */}
           <div
-            className={`flex gap-2 p-2 lg:p-4 justify-between w-full md:w-[calc(100%-300px)]  ${
-              currentTheme === "light" ? "bg-white" : "bg-night"
-            }`}
+            className={`flex gap-2 p-2 lg:p-4 justify-between ${
+              showRightPanel ? "w-full md:w-[calc(100%-300px)]" : "w-full "
+            }  ${currentTheme === "light" ? "bg-white" : "bg-night"}`}
           >
             <div className="w-1/3 flex">
               <input
@@ -243,8 +243,14 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="p-4">
-            <div className="w-full space-y-3 md:space-y-5">
+          <div className="p-4 md:p-8">
+            {/* Tabs */}
+
+            <div
+              className={` space-y-3 md:space-y-5 ${
+                showRightPanel ? "w-full md:w-[calc(100%-300px)]" : "w-full"
+              }`}
+            >
               {/* BreadCrumbs */}
               <div className="flex items-center justify-between">
                 <div className="flex flex-col md:flex-row">
@@ -312,7 +318,12 @@ const Home = () => {
                   </Tooltip>
                   <div className="flex px-2 gap-2">
                     <ServerStackIcon className="nav-icon text-tertiary" />
-                    <Squares2X2Icon className="nav-icon" />
+                    <Tooltip text="Open sidebar" position="left" open>
+                      <Squares2X2Icon
+                        className="nav-icon"
+                        onClick={() => setShowRightPanel(!showRightPanel)}
+                      />
+                    </Tooltip>
                   </div>
                 </div>
               </div>
@@ -328,7 +339,7 @@ const Home = () => {
                         ? "bg-white text-secondary"
                         : "bg-primary/20 text-white cursor-pointer"
                     }
-                    flex  items-center justify-between rounded-md p-4 overflow-scroll scroll-smooth scrollbar-hide`}
+                    flex  items-center justify-between rounded-2xl p-4 overflow-scroll scroll-smooth scrollbar-hide`}
                   >
                     {tabsItems.map((item) => (
                       <button
@@ -423,7 +434,7 @@ const Home = () => {
                     disabled={addTodoMutation.isPending}
                     className={`mt-2 px-4 py-2 rounded-md cursor-pointer ${
                       currentTheme === "light"
-                        ? "bg-tertiary text-white"  
+                        ? "bg-tertiary text-white"
                         : "bg-primary/20 text-secondary"
                     }`}
                   >
@@ -435,7 +446,10 @@ const Home = () => {
           </div>
         </div>
 
-        {/* <RightSidePanel currentTheme={currentTheme} /> */}
+        <RightSidePanel
+          currentTheme={currentTheme}
+          showRightPanel={showRightPanel}
+        />
       </section>
     </main>
   );
