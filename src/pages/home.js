@@ -245,7 +245,7 @@ const Home = () => {
             >
               <input
                 type="search"
-                placeholder="Search"
+                placeholder={t("placeholders.search")}
                 className={`${
                   currentTheme === "light" ? "bg-content-bg" : "bg-primary/20"
                 } w-full p-2 h-8 focus:outline-none focus:ring-none rounded-md`}
@@ -423,7 +423,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* <RightSidePanel currentTheme={currentTheme} /> */}
+        <RightSidePanel currentTheme={currentTheme} />
       </section>
     </main>
   );

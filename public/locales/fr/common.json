@@ -13,6 +13,10 @@
   "actions": {
     "limited": "accès limité"
   },
+  "placeholders": {
+    "search": "recherche",
+    "message": "Tapez un message ..."
+  },
   "tabs": {
     "alltasks": "toutes les tâches",
     "completed": "complété",

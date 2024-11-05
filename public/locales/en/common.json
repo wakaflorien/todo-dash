@@ -13,6 +13,10 @@
     "actions": {
         "limited": "limited access"
     },
+    "placeholders": {
+        "search": "search",
+        "message": "Type a message ..."
+    },
     "tabs": {
         "alltasks": "all tasks",
         "completed": "completed",
