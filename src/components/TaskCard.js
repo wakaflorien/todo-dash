@@ -7,7 +7,11 @@ import UserGroupBlend from "./UserGroupBlend";
 
 function TaskCard(props) {
   return (
-    <div className="rounded-lg bg-white p-4 my-4 break-inside">
+    <div
+      className={`rounded-lg  p-2 md:p-4 my-2 md:my-4 space-y-2 md:space-y-4 break-inside ${
+        props.currentTheme === "light" ? "bg-white " : "bg-primary/20 "
+      }`}
+    >
       {props.hasImage && (
         <figure>
           <img
@@ -25,7 +29,7 @@ function TaskCard(props) {
               : props.status === "completed"
               ? "completedTask"
               : "pendingTask"
-          }`}
+          } ${props.currentTheme === "dark" && "!bg-primary/20 "}`}
         >
           {props.status}
         </p>

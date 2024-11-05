@@ -28,6 +28,7 @@ import Modal from "../components/Modal";
 import TasksContainer from "../components/TasksContainer";
 import { addTodo, fetchTodos } from "../api/api";
 import { setError, setTodos } from "../app/slices/todosSlice";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -109,6 +110,7 @@ const Home = () => {
     addTodoMutation.mutate(formData);
   };
 
+  console.log(todos);
   const totalTasks = todos ? todos.limit : 0;
   const totalCompletedTasks = todos.todos
     ? todos.todos.filter((todo) => todo.completed).length
@@ -136,15 +138,7 @@ const Home = () => {
       current: true,
       tasksCount: totalTasks,
       content: (
-        <>
-          {isLoading ? (
-            <div className="flex justify-center items-center h-96">
-              <ArrowPathIcon className="w-8 h-8 animate-spin" />
-            </div>
-          ) : (
-            <TasksContainer allTasks={allTasks} />
-          )}
-        </>
+        <TasksContainer allTasks={allTasks} currentTheme={currentTheme} />
       ),
     },
     {
@@ -153,17 +147,10 @@ const Home = () => {
       current: false,
       tasksCount: totalActiveTasks,
       content: (
-        <>
-          {isLoading ? (
-            <div className="flex justify-center items-center h-96">
-              <ArrowPathIcon className="w-8 h-8 animate-spin" />
-            </div>
-          ) : (
-            <TasksContainer
-              allTasks={allTasks.filter((todo) => todo.status === "to do")}
-            />
-          )}
-        </>
+        <TasksContainer
+          allTasks={allTasks.filter((todo) => todo.status === "to do")}
+          currentTheme={currentTheme}
+        />
       ),
     },
     {
@@ -172,19 +159,12 @@ const Home = () => {
       current: false,
       tasksCount: totalActiveTasks,
       content: (
-        <>
-          {isLoading ? (
-            <div className="flex justify-center items-center h-96">
-              <ArrowPathIcon className="w-8 h-8 animate-spin" />
-            </div>
-          ) : (
-            <TasksContainer
-              allTasks={allTasks.filter(
-                (todo) => !todo.completed && todo.status !== "to do"
-              )}
-            />
+        <TasksContainer
+          allTasks={allTasks.filter(
+            (todo) => !todo.completed && todo.status !== "to do"
           )}
-        </>
+          currentTheme={currentTheme}
+        />
       ),
     },
     {
@@ -193,19 +173,12 @@ const Home = () => {
       current: false,
       tasksCount: totalCompletedTasks,
       content: (
-        <>
-          {isLoading ? (
-            <div className="flex justify-center items-center h-96">
-              <ArrowPathIcon className="w-8 h-8 animate-spin" />
-            </div>
-          ) : (
-            <TasksContainer
-              allTasks={allTasks.filter(
-                (todo) => todo.completed && todo.status !== "to do"
-              )}
-            />
+        <TasksContainer
+          allTasks={allTasks.filter(
+            (todo) => todo.completed && todo.status !== "to do"
           )}
-        </>
+          currentTheme={currentTheme}
+        />
       ),
     },
   ];
@@ -220,7 +193,7 @@ const Home = () => {
     >
       <section
         className={`flex flex-col justify-between items-center p-4 w-fit h-screen  shadow-r-md border-r ${
-          currentTheme === "light" ? "border-content-bg" : "border-primary/20"
+          currentTheme === "light" ? "border-content-bg" : "border-none"
         }`}
       >
         <LeftSidePanel currentTheme={currentTheme} />
@@ -238,42 +211,47 @@ const Home = () => {
               currentTheme === "light" ? "bg-white" : "bg-night"
             }`}
           >
-            <div
-              className={`flex w-full items-center gap-2 ${
-                currentTheme === "light" ? "bg-content-bg" : "bg-primary/20"
-              }  rounded-md`}
-            >
+            <div className="w-1/3 flex">
               <input
                 type="search"
                 placeholder={t("placeholders.search")}
                 className={`${
-                  currentTheme === "light" ? "bg-content-bg" : "bg-primary/20"
-                } w-full p-2 h-8 focus:outline-none focus:ring-none rounded-md`}
+                  currentTheme === "light"
+                    ? "bg-content-bg "
+                    : "bg-primary/20 text-white cursor-pointer"
+                } w-full p-2 h-8 focus:outline-none focus:ring-none rounded-l-md`}
               />
-              <div className="flex px-2 gap-2 divide-x divide-solid">
+              <button
+                onClick={() => console.log("Notify")}
+                className={`p-2 rounded-r-md ${
+                  currentTheme === "light"
+                    ? "bg-content-bg text-secondary"
+                    : "bg-primary/20 text-white cursor-pointer"
+                }`}
+              >
                 <MagnifyingGlassIcon className="nav-icon" />
-              </div>
+              </button>
             </div>
 
-            <ThemeSwitcher
-              currentTheme={currentTheme}
-              setCurrentTheme={setCurrentTheme}
-            />
-
-            <Notification currentTheme={currentTheme} />
-
-            <LanguageSwitcher currentTheme={currentTheme} />
+            <div className="flex space-x-2 md:space-x-4">
+              <ThemeSwitcher
+                currentTheme={currentTheme}
+                setCurrentTheme={setCurrentTheme}
+              />
+              <Notification currentTheme={currentTheme} />
+              <LanguageSwitcher currentTheme={currentTheme} />
+            </div>
           </div>
 
           <div className="p-4">
-            <div className="w-full">
+            <div className="w-full space-y-3 md:space-y-5">
               {/* BreadCrumbs */}
-              <div className="flex justify-between">
+              <div className="flex items-center justify-between">
                 <div className="flex flex-col md:flex-row">
                   {breadCrumbsItems.map((item) => (
                     <div
                       key={item.id}
-                      className="flex items-center gap-1 md:gap-2"
+                      className="flex items-center gap-2 md:gap-4"
                     >
                       <p
                         className={`capitalize cursor-pointer text-xs md:text-sm ${
@@ -285,7 +263,7 @@ const Home = () => {
                         {item.name}
                       </p>
                       {item.id !== 3 && (
-                        <ChevronRightIcon className="nav-icon" />
+                        <ChevronRightIcon className="nav-icon mx-1 md:mx-2" />
                       )}
                     </div>
                   ))}
@@ -310,7 +288,7 @@ const Home = () => {
               </header>
 
               {/* Actions */}
-              <div className="flex items-center justify-between py-2 gap-2 md:py-4 md:gap-4">
+              <div className="flex items-center justify-between">
                 <div className="flex gap-2 divide-x divide-solid">
                   <div className="flex gap-2 items-center">
                     <LockOpenIcon className="nav-icon" />
@@ -340,39 +318,62 @@ const Home = () => {
               </div>
 
               {/* Tabs */}
-              <nav className="w-full bg-white flex  items-center justify-between rounded-md p-4 overflow-scroll scroll-smooth scrollbar-hide">
-                {tabsItems.map((item) => (
-                  <button
-                    key={item.id}
-                    className={`flex  flex-col gap-2 items-center md:flex-row py-2 px-4 border-b-2 font-medium text-sm transition-colors duration-200
-                        ${
-                          activeTab === item.id
-                            ? "border-tertiary text-tertiary"
-                            : "border-transparent text-secondary hover:text-tertiary "
-                        }
-                      `}
-                    onClick={() => setActiveTab(item.id)}
+              <>
+                {isLoading ? (
+                  <Loading />
+                ) : (
+                  <nav
+                    className={`w-full ${
+                      currentTheme === "light"
+                        ? "bg-white text-secondary"
+                        : "bg-primary/20 text-white cursor-pointer"
+                    }
+                    flex  items-center justify-between rounded-md p-4 overflow-scroll scroll-smooth scrollbar-hide`}
                   >
-                    <p className="capitalize">{item.name}</p>
-                    <span className="text-xs p-1 bg-content-bg text-secondary rounded-md cursor-pointer">
-                      {item.tasksCount}
-                    </span>
-                  </button>
-                ))}
+                    {tabsItems.map((item) => (
+                      <button
+                        key={item.id}
+                        className={`flex  flex-col gap-2 items-center md:flex-row py-2 px-4 border-b-4 font-medium text-sm transition-colors duration-200
+                    ${
+                      activeTab === item.id
+                        ? "border-tertiary text-tertiary"
+                        : "border-transparent text-secondary hover:text-tertiary "
+                    }
+                  `}
+                        onClick={() => setActiveTab(item.id)}
+                      >
+                        <p className="capitalize">{item.name}</p>
+                        <span
+                          className={`text-xs p-1 rounded-md cursor-pointer text-secondary ${
+                            currentTheme === "light"
+                              ? "bg-content-bg"
+                              : "bg-primary/20  cursor-pointer"
+                          }`}
+                        >
+                          {item.tasksCount}
+                        </span>
+                      </button>
+                    ))}
 
-                <div className="hidden sm:flex  sm:flex-col lg:flex-row gap-2">
-                  <SecondaryButton
-                    icon={<AdjustmentsHorizontalIcon className="nav-icon" />}
-                    text={t("tabs.filter")}
-                    onClick={() => {}}
-                  />
-                  <SecondaryButton
-                    icon={<PlusIcon className="nav-icon" />}
-                    text={t("tabs.newtask")}
-                    onClick={() => setIsOpen(!isOpen)}
-                  />
-                </div>
-              </nav>
+                    <div className="hidden sm:flex  sm:flex-col lg:flex-row gap-2">
+                      <SecondaryButton
+                        icon={
+                          <AdjustmentsHorizontalIcon className="nav-icon" />
+                        }
+                        text={t("tabs.filter")}
+                        onClick={() => {}}
+                        currentTheme={currentTheme}
+                      />
+                      <SecondaryButton
+                        icon={<PlusIcon className="nav-icon" />}
+                        text={t("tabs.newtask")}
+                        onClick={() => setIsOpen(!isOpen)}
+                        currentTheme={currentTheme}
+                      />
+                    </div>
+                  </nav>
+                )}
+              </>
             </div>
 
             {/* Tab Content */}
@@ -380,9 +381,10 @@ const Home = () => {
               {tabsItems.map((tab, index) => (
                 <div
                   key={tab.id}
-                  className={`${
-                    activeTab === tab.id ? "block " : "hidden"
-                  } rounded-lg bg-content-bg`}
+                  className={`${activeTab === tab.id ? "block " : "hidden"}
+                  ${
+                    currentTheme === "light" ? "bg-content-bg " : "bg-night"
+                  } rounded-lg `}
                 >
                   {tab.content}
                 </div>
@@ -394,6 +396,7 @@ const Home = () => {
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
               title="Add New Task"
+              currentTheme={currentTheme}
             >
               <form
                 onSubmit={handleCreateNewTodo}
@@ -406,14 +409,23 @@ const Home = () => {
                   name="todo"
                   onChange={handleChange}
                   placeholder="Add new todo"
-                  className="w-full bg-white focus:outline-none focus:ring-1 border rounded-md p-2"
+                  className={`w-full focus:outline-none focus:ring-1 border border-secondary rounded-md p-2 ${
+                    currentTheme === "light"
+                      ? "bg-white "
+                      : "bg-primary/20 border-none"
+                  }`}
                   required
                 />
                 <div className="mt-4 flex justify-end space-x-3">
                   <button
                     type="submit"
+                    name="addTodo"
                     disabled={addTodoMutation.isPending}
-                    className="mt-2 px-4 py-2 bg-tertiary text-white rounded-md"
+                    className={`mt-2 px-4 py-2 rounded-md cursor-pointer ${
+                      currentTheme === "light"
+                        ? "bg-tertiary text-white"  
+                        : "bg-primary/20 text-secondary"
+                    }`}
                   >
                     {addTodoMutation.isPending ? "Adding..." : "Add Todo"}
                   </button>
@@ -423,7 +435,7 @@ const Home = () => {
           </div>
         </div>
 
-        <RightSidePanel currentTheme={currentTheme} />
+        {/* <RightSidePanel currentTheme={currentTheme} /> */}
       </section>
     </main>
   );
