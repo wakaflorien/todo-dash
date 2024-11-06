@@ -32,6 +32,7 @@
     "overview": {
         "project": "project overview",
         "seeall": "see all",
+        "closeall": "close all",
         "timeline": "timeline",
         "team": "team",
         "status": "status",

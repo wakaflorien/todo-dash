@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import {
   AdjustmentsHorizontalIcon,
-  ArrowPathIcon,
+  Bars3BottomLeftIcon,
   ChevronDownIcon,
   ChevronRightIcon,
   LinkIcon,
@@ -29,6 +29,7 @@ import TasksContainer from "../components/TasksContainer";
 import { addTodo, fetchTodos } from "../api/api";
 import { setError, setTodos } from "../app/slices/todosSlice";
 import Loading from "../components/Loading";
+import SmallNav from "../components/SmallNav";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -45,6 +46,7 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [showRightPanel, setShowRightPanel] = useState(false);
+  const [showSmallNav, setShowSmallNav] = useState(false);
 
   const transformTodos = (todos) => {
     if (!todos) return [];
@@ -192,7 +194,7 @@ const Home = () => {
       } `}
     >
       <section
-        className={`flex flex-col justify-between items-center p-4 w-fit h-screen  shadow-r-md border-r ${
+        className={`hidden md:flex flex-col justify-between items-center p-4 w-fit h-screen  shadow-r-md border-r ${
           currentTheme === "light" ? "border-content-bg" : "border-none"
         }`}
       >
@@ -211,7 +213,7 @@ const Home = () => {
               showRightPanel ? "w-full md:w-[calc(100%-300px)]" : "w-full "
             }  ${currentTheme === "light" ? "bg-white" : "bg-night"}`}
           >
-            <div className="w-1/3 flex">
+            <div className="w-full md:w-1/3 flex">
               <input
                 type="search"
                 placeholder={t("placeholders.search")}
@@ -233,7 +235,7 @@ const Home = () => {
               </button>
             </div>
 
-            <div className="flex space-x-2 md:space-x-4">
+            <div className="hidden md:flex space-x-2 md:space-x-4">
               <ThemeSwitcher
                 currentTheme={currentTheme}
                 setCurrentTheme={setCurrentTheme}
@@ -247,12 +249,12 @@ const Home = () => {
             {/* Tabs */}
 
             <div
-              className={` space-y-3 md:space-y-5 ${
+              className={`space-y-3 md:space-y-5 ${
                 showRightPanel ? "w-full md:w-[calc(100%-300px)]" : "w-full"
               }`}
             >
               {/* BreadCrumbs */}
-              <div className="flex items-center justify-between">
+              <div className="hidden md:flex items-center justify-between">
                 <div className="flex flex-col md:flex-row">
                   {breadCrumbsItems.map((item) => (
                     <div
@@ -289,19 +291,27 @@ const Home = () => {
               </div>
 
               {/* Title */}
-              <header className="capitalize font-semibold text-lg md:text-2xl">
+              <header className="hidden md:block capitalize font-semibold text-lg md:text-2xl">
                 {t("titles.website")}
+              </header>
+
+              {/* Mobile side Navigation */}
+              <header
+                className="block md:hidden"
+                onClick={() => setShowSmallNav(true)}
+              >
+                <Bars3BottomLeftIcon className="nav-icon " />
               </header>
 
               {/* Actions */}
               <div className="flex items-center justify-between">
-                <div className="flex gap-2 divide-x divide-solid">
+                <div className="flex gap-2 md:divide-x divide-solid">
                   <div className="flex gap-2 items-center">
                     <LockOpenIcon className="nav-icon" />
-                    <span className="text-secondary text-xs md:text-sm capitalize">
+                    <span className="text-secondary text-xs md:text-sm capitalize hidden md:block">
                       {t("actions.limited")}
                     </span>
-                    <ChevronDownIcon className="nav-icon" />
+                    <ChevronDownIcon className="nav-icon hidden md:block" />
                   </div>
                   <div className="px-4">
                     <UserGroupBlend
@@ -312,7 +322,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="hidden sm:flex gap-2 divide-x divide-solid">
+                <div className="hidden md:flex gap-2 divide-x divide-solid">
                   <Tooltip text="Copy link" position="bottom">
                     <LinkIcon className="nav-icon" />
                   </Tooltip>
@@ -449,6 +459,15 @@ const Home = () => {
         <RightSidePanel
           currentTheme={currentTheme}
           showRightPanel={showRightPanel}
+          closeAll={() => setShowRightPanel(false)}
+        />
+
+        <SmallNav
+          currentTheme={currentTheme}
+          setCurrentTheme={setCurrentTheme}
+          showSmallNav={showSmallNav}
+          closeSmallNav={() => setShowSmallNav(false)}
+          breadCrumbsItems={breadCrumbsItems}
         />
       </section>
     </main>
