@@ -45,7 +45,7 @@ const Home = () => {
   const [currentTheme, setCurrentTheme] = useState("light");
   const [activeTab, setActiveTab] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
-  const [showRightPanel, setShowRightPanel] = useState(false);
+  const [showRightPanel, setShowRightPanel] = useState(true);
   const [showSmallNav, setShowSmallNav] = useState(false);
 
   const transformTodos = (todos) => {
@@ -202,7 +202,7 @@ const Home = () => {
       </section>
 
       <section
-        className={`flex justify-between w-full ${
+        className={`flex justify-between w-full h-screen overflow-scroll scrollbar-hide ${
           currentTheme === "light" ? "bg-content-bg" : "bg-night"
         } static`}
       >
@@ -221,7 +221,7 @@ const Home = () => {
                   currentTheme === "light"
                     ? "bg-content-bg "
                     : "bg-primary/20 text-white cursor-pointer"
-                } w-full p-2 h-8 focus:outline-none focus:ring-none rounded-l-md`}
+                } w-full p-2 h-8 text-xs focus:outline-none focus:ring-none rounded-l-md`}
               />
               <button
                 onClick={() => console.log("Notify")}
@@ -264,7 +264,7 @@ const Home = () => {
                       <p
                         className={`capitalize cursor-pointer text-xs md:text-sm ${
                           item.active
-                            ? "text-primary hover:text-secondary"
+                            ? " hover:text-secondary"
                             : "text-secondary hover:text-primary"
                         }`}
                       >
@@ -276,7 +276,8 @@ const Home = () => {
                     </div>
                   ))}
                 </div>
-                <div className="flex flex-col items-end">
+
+                <div className="hidden lg:flex flex-col items-end">
                   <p className="capitalize text-xs md:text-md">
                     {t("breadcrumbs.from")} 23 {t("months.april")} 7
                   </p>
@@ -306,12 +307,30 @@ const Home = () => {
               {/* Actions */}
               <div className="flex items-center justify-between">
                 <div className="flex gap-2 md:divide-x divide-solid">
-                  <div className="flex gap-2 items-center">
-                    <LockOpenIcon className="nav-icon" />
-                    <span className="text-secondary text-xs md:text-sm capitalize hidden md:block">
+                  <div
+                    className={`flex gap-2 items-center ${
+                      currentTheme === "light"
+                        ? "text-primary"
+                        : "text-secondary"
+                    }`}
+                  >
+                    <LockOpenIcon
+                      className={`nav-icon ${
+                        currentTheme === "light"
+                          ? "!text-primary"
+                          : "!text-secondary"
+                      }`}
+                    />
+                    <span className="text-xs md:text-sm capitalize hidden md:block">
                       {t("actions.limited")}
                     </span>
-                    <ChevronDownIcon className="nav-icon hidden md:block" />
+                    <ChevronDownIcon
+                      className={`nav-icon hidden md:block ${
+                        currentTheme === "light"
+                          ? "!text-primary"
+                          : "!text-secondary"
+                      }`}
+                    />
                   </div>
                   <div className="px-4">
                     <UserGroupBlend
@@ -322,13 +341,17 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="hidden md:flex gap-2 divide-x divide-solid">
+                <div className="flex gap-2 divide-x divide-solid">
                   <Tooltip text="Copy link" position="bottom">
                     <LinkIcon className="nav-icon" />
                   </Tooltip>
                   <div className="flex px-2 gap-2">
                     <ServerStackIcon className="nav-icon text-tertiary" />
-                    <Tooltip text="Open sidebar" position="left" open>
+                    <Tooltip
+                      text={`${showRightPanel ? "Hide" : "Show"} panel`}
+                      position="left"
+                      open
+                    >
                       <Squares2X2Icon
                         className="nav-icon"
                         onClick={() => setShowRightPanel(!showRightPanel)}
@@ -343,56 +366,60 @@ const Home = () => {
                 {isLoading ? (
                   <Loading />
                 ) : (
-                  <nav
-                    className={`w-full ${
-                      currentTheme === "light"
-                        ? "bg-white text-secondary"
-                        : "bg-primary/20 text-white cursor-pointer"
-                    }
-                    flex  items-center justify-between rounded-2xl p-4 overflow-scroll scroll-smooth scrollbar-hide`}
-                  >
-                    {tabsItems.map((item) => (
-                      <button
-                        key={item.id}
-                        className={`flex  flex-col gap-2 items-center md:flex-row py-2 px-4 border-b-4 font-medium text-sm transition-colors duration-200
+                  <>
+                    <nav
+                      className={`w-full ${
+                        currentTheme === "light"
+                          ? "bg-white text-secondary"
+                          : "bg-primary/20 text-white cursor-pointer"
+                      }
+                    flex  items-center justify-between space-x-4 md:space-x-8 rounded-xl overflow-scroll scroll-smooth scrollbar-hide`}
+                    >
+                      {tabsItems.map((item) => (
+                        <button
+                          className={`relative flex flex-col md:flex-row  items-center md:py-2 font-medium text-sm transition-colors duration-200
                     ${
                       activeTab === item.id
-                        ? "border-tertiary text-tertiary"
-                        : "border-transparent text-secondary hover:text-tertiary "
+                        ? " text-tertiary"
+                        : " text-secondary hover:text-tertiary "
                     }
                   `}
-                        onClick={() => setActiveTab(item.id)}
-                      >
-                        <p className="capitalize">{item.name}</p>
-                        <span
-                          className={`text-xs p-1 rounded-md cursor-pointer text-secondary ${
-                            currentTheme === "light"
-                              ? "bg-content-bg"
-                              : "bg-primary/20  cursor-pointer"
-                          }`}
+                          onClick={() => setActiveTab(item.id)}
                         >
-                          {item.tasksCount}
-                        </span>
-                      </button>
-                    ))}
+                          <p className="capitalize p-2 w-[100px]">{item.name}</p>
+                          <span
+                            className={`text-xs p-1 rounded-md cursor-pointer text-secondary ${
+                              currentTheme === "light"
+                                ? "bg-content-bg"
+                                : "bg-primary/20  cursor-pointer"
+                            }`}
+                          >
+                            {item.tasksCount}
+                          </span>
+                          {activeTab === item.id && (
+                            <span className="absolute bottom-0 left-0 bg-tertiary h-1 w-full rounded-t-md shadow-md shadow-tertiary"></span>
+                          )}
+                        </button>
+                      ))}
 
-                    <div className="hidden sm:flex  sm:flex-col lg:flex-row gap-2">
-                      <SecondaryButton
-                        icon={
-                          <AdjustmentsHorizontalIcon className="nav-icon" />
-                        }
-                        text={t("tabs.filter")}
-                        onClick={() => {}}
-                        currentTheme={currentTheme}
-                      />
-                      <SecondaryButton
-                        icon={<PlusIcon className="nav-icon" />}
-                        text={t("tabs.newtask")}
-                        onClick={() => setIsOpen(!isOpen)}
-                        currentTheme={currentTheme}
-                      />
-                    </div>
-                  </nav>
+                      <div className="flex gap-2 md:gap-4 px-2">
+                        <SecondaryButton
+                          icon={
+                            <AdjustmentsHorizontalIcon className="nav-icon" />
+                          }
+                          text={t("tabs.filter")}
+                          onClick={() => {}}
+                          currentTheme={currentTheme}
+                        />
+                        <SecondaryButton
+                          icon={<PlusIcon className="nav-icon" />}
+                          text={t("tabs.newtask")}
+                          onClick={() => setIsOpen(!isOpen)}
+                          currentTheme={currentTheme}
+                        />
+                      </div>
+                    </nav>
+                  </>
                 )}
               </>
             </div>

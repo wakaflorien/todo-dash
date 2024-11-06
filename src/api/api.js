@@ -1,7 +1,7 @@
 const BASE_URL = "https://dummyjson.com";
 
 export const fetchTodos = async () => {
-  const response = await fetch(`${BASE_URL}/todos?limit=0`);
+  const response = await fetch(`${BASE_URL}/todos?limit=12`);
   if (!response.ok) throw new Error("Failed to fetch todos");
   return response.json();
 };

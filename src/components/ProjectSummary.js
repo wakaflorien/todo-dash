@@ -12,7 +12,7 @@ function ProjectSummary(props) {
   const { t } = useTranslation();
   return (
     <div
-      className={`w-full ${
+      className={`relative w-full ${
         props.currentTheme === "light" ? "bg-content-bg" : "bg-primary/20"
       } p-4 space-y-4 rounded-md`}
     >
@@ -55,6 +55,7 @@ function ProjectSummary(props) {
           {t("tabs.inprogress")}
         </span>
       </div>
+      <div className="absolute top-0 left-0 bg-tertiary h-24 w-1 rounded-r-md shadow-md shadow-tertiary"></div>
     </div>
   );
 }
