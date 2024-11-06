@@ -12,7 +12,7 @@ function SmallNav(props) {
     <div
       className={`${
         props.showSmallNav ? "block" : "hidden"
-      } block md:hidden absolute w-2/3 h-screen bg-slate-800 z-50 top-0 left-0`}
+      } block md:hidden absolute w-2/3 h-screen ${props.currentTheme === "light" ? "bg-white" : "bg-night"} z-50 top-0 left-0`}
     >
       <div className="flex justify-between p-4">
         <AcademicCapIcon className="nav-icon" />
@@ -24,11 +24,8 @@ function SmallNav(props) {
             props.breadCrumbsItems.map((item) => (
               <div key={item.id} className="flex items-center gap-4">
                 <p
-                  className={`capitalize cursor-pointer text-xs md:text-sm ${
-                    item.active
-                      ? "text-white hover:text-secondary"
-                      : "text-secondary hover:text-primary"
-                  }`}
+                  className={`capitalize cursor-pointer text-xs md:text-sm text-secondary hover:text-secondary ${
+                    item.active && props.currentTheme === "light" ? "!text-primary hover:!text-primary" : ""}`}
                 >
                   {item.name}
                 </p>
@@ -36,7 +33,7 @@ function SmallNav(props) {
             ))}
           <div className="flex items-center space-x-2">
             <BellIcon className="nav-icon" />
-            <span className="text-xs text-white">Notification</span>
+            <span className={`text-xs ${props.currentTheme === "light" ? "text-primary" : "text-white"}`}>Notification</span>
           </div>
         </div>
         <div className="flex flex-col space-y-4  ">

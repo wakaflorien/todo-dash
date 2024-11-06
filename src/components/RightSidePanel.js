@@ -18,12 +18,12 @@ function RightSidePanel(props) {
           props.currentTheme === "light"
             ? "bg-white border-l"
             : "bg-night border-l border-night"
-        } w-full md:w-[300px] h-fit  shadow-sm p-4 space-y-4 absolute right-0 z-50 hidden md:block`}
+        } w-full md:w-[300px] h-fit  shadow-sm p-4 space-y-4 absolute right-0 z-50 `}
       >
         {/* Right sidebar panel */}
         <div className="flex flex-col gap-4">
           <header className="flex justify-between gap-4 capitalize text-sm">
-            <span className="text-primary">{t("overview.project")}</span>
+            <span className={`${props.currentTheme === "light" ? "text-primary" : "text-white"}`}>{t("overview.project")}</span>
             <span className="text-secondary cursor-pointer" onClick={props.closeAll}>
               {props.showRightPanel ? t("overview.closeall") : t("overview.seeall")}
             </span>
@@ -80,7 +80,7 @@ function RightSidePanel(props) {
             >
               <input
                 type="text"
-                className={`w-full bg-inherit focus:outline-none focus:ring-none rounded-md p-2 ${
+                className={`w-full bg-inherit focus:outline-none focus:ring-none rounded-md p-2 text-xs ${
                   props.currentTheme === "light"
                     ? "bg-inherit "
                     : "bg-transparent"
