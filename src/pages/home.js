@@ -33,6 +33,7 @@ import SmallNav from "../components/SmallNav";
 
 const Home = () => {
   const { t } = useTranslation();
+  const w = window.innerWidth;
   const [formData, setFormData] = useState({
     todo: "",
     userId: "",
@@ -45,7 +46,7 @@ const Home = () => {
   const [currentTheme, setCurrentTheme] = useState("light");
   const [activeTab, setActiveTab] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
-  const [showRightPanel, setShowRightPanel] = useState(true);
+  const [showRightPanel, setShowRightPanel] = useState(w > 700 ? true : false);
   const [showSmallNav, setShowSmallNav] = useState(false);
 
   const transformTodos = (todos) => {
@@ -265,7 +266,7 @@ const Home = () => {
                         className={`capitalize cursor-pointer text-xs md:text-sm ${
                           item.active
                             ? " hover:text-secondary"
-                            : "text-secondary hover:text-primary"
+                            : "text-secondary hover:text-white"
                         }`}
                       >
                         {item.name}
@@ -377,6 +378,7 @@ const Home = () => {
                     >
                       {tabsItems.map((item) => (
                         <button
+                          key={item.id}
                           className={`relative flex flex-col md:flex-row  items-center md:py-2 font-medium text-sm transition-colors duration-200
                     ${
                       activeTab === item.id
@@ -386,7 +388,9 @@ const Home = () => {
                   `}
                           onClick={() => setActiveTab(item.id)}
                         >
-                          <p className="capitalize p-2 w-[100px]">{item.name}</p>
+                          <p className="capitalize p-2 w-[100px]">
+                            {item.name}
+                          </p>
                           <span
                             className={`text-xs p-1 rounded-md cursor-pointer text-secondary ${
                               currentTheme === "light"
