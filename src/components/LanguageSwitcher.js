@@ -43,7 +43,7 @@ const LanguageSwitcher = (props) => {
       </button>
 
       {isOpen && (
-        <div className={`absolute right-0 mt-2 origin-top-right z-40 ${props.currentTheme === "light" ? "bg-content-bg" : "bg-primary/20 text-white"} rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}>
+        <div className={`absolute right-0 mt-2 origin-top-right z-40 ${props.currentTheme === "light" ? "bg-content-bg" : "bg-primary text-white"} rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}>
           <div className="py-1">
             {languages.map((language) => (
               <button
