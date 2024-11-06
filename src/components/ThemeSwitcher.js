@@ -23,9 +23,9 @@ function ThemeSwitcher(props) {
               } p-2 rounded-md`}
               onClick={changeTheme}
             >
-              <MoonIcon className="nav-icon" />
+              <SunIcon className="nav-icon" />
               {props.smallNav && (
-                <p className="text-xs font-semibold">Dark mode</p>
+                <p className="text-xs font-semibold">Light mode</p>
               )}
             </div>
           ) : (
@@ -37,9 +37,9 @@ function ThemeSwitcher(props) {
               } p-2 rounded-md`}
               onClick={changeTheme}
             >
-              <SunIcon className="nav-icon" />
+              <MoonIcon className="nav-icon" />
               {props.smallNav && (
-                <p className="text-xs font-semibold">Light mode</p>
+                <p className="text-xs font-semibold">Dark mode</p>
               )}
             </div>
           )}
@@ -54,9 +54,9 @@ function ThemeSwitcher(props) {
           }`}
         >
           {props.currentTheme === "dark" ? (
-            <MoonIcon className="nav-icon" />
-          ) : (
             <SunIcon className="nav-icon" />
+          ) : (
+            <MoonIcon className="nav-icon" />
           )}
         </button>
       )}

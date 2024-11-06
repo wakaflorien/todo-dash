@@ -6,7 +6,7 @@ const UserGroupBlend = (props) => {
     { id: 1, name: "Sarah Wilson", role: "Designer" },
     { id: 2, name: "Mike Johnson", role: "Developer" },
     { id: 3, name: "Emma Davis", role: "Manager" },
-    { id: 4, name: "Alex Smith", role: "Engineer" },
+    // { id: 4, name: "Alex Smith", role: "Engineer" },
   ];
 
   return (

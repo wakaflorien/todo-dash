@@ -36,7 +36,7 @@
   }
 
   .nav-icon-add {
-    @apply size-4 w-8 h-8 text-secondary hover:text-tertiary !cursor-pointer border border-dashed rounded-full;
+    @apply size-2 w-6 h-6 text-secondary hover:text-tertiary !cursor-pointer border border-dashed rounded-full;
   }
 
   .border-night {
