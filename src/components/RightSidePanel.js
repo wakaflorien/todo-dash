@@ -18,14 +18,14 @@ function RightSidePanel(props) {
           props.currentTheme === "light"
             ? "bg-white border-l"
             : "bg-night border-l border-night"
-        } w-[300px] h-content sm:h-screen  shadow-sm p-4 space-y-4 absolute right-0 z-50 hidden md:block`}
+        } w-full md:w-[300px] h-fit  shadow-sm p-4 space-y-4 absolute right-0 z-50 hidden md:block`}
       >
         {/* Right sidebar panel */}
         <div className="flex flex-col gap-4">
           <header className="flex justify-between gap-4 capitalize text-sm">
             <span className="text-primary">{t("overview.project")}</span>
-            <span className="text-secondary cursor-pointer">
-              {t("overview.seeall")}
+            <span className="text-secondary cursor-pointer" onClick={props.closeAll}>
+              {props.showRightPanel ? t("overview.closeall") : t("overview.seeall")}
             </span>
           </header>
 
@@ -89,7 +89,7 @@ function RightSidePanel(props) {
               />
               <div className="flex px-2 gap-2">
                 <MicrophoneIcon className="nav-icon" />
-                <line
+                <span
                   className={`w-0.5 h-4 ${
                     props.currentTheme === "light"
                       ? "bg-secondary "

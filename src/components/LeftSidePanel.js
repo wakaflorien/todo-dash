@@ -8,13 +8,14 @@ import {
   Cog6ToothIcon,
   UserIcon,
   PlusIcon,
+  AcademicCapIcon,
 } from "@heroicons/react/24/outline";
 
 function LeftSidePanel(props) {
   return (
     <>
       <div className="space-y-11">
-        <header>logo</header>
+        <header><AcademicCapIcon className="nav-icon" /></header>
         <nav className="flex flex-col gap-6 hover:cursor-pointer items-center">
           <HomeIcon className="nav-icon" />
           <EnvelopeIcon className="nav-icon" />

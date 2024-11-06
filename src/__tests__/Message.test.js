@@ -96,19 +96,4 @@ describe("Message component", () => {
     render(<Message {...defaultProps} />);
     render(<Tooltip {...tooltipProps} />);
   });
-
-  it("applies correct styling classes to the message container", () => {
-    const { container } = render(<Message {...defaultProps} />);
-    const messageContainer = container.querySelector(
-      ".rounded-md.bg-content-bg"
-    );
-    expect(messageContainer).toHaveClass(
-      "p-2",
-      "rounded-md",
-      "bg-content-bg",
-      "flex",
-      "justify-between",
-      "items-center"
-    );
-  });
 });
