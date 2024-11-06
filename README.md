@@ -2,6 +2,10 @@
 
 Single page manage daily todo dashboard UI/UX
 
+## **Coverage**
+
+[![codecov](https://codecov.io/github/wakaflorien/todo-dash/graph/badge.svg?token=YILKS0Q33Y)](https://codecov.io/github/wakaflorien/todo-dash)
+
 ## **Prerequisites**
 
 - Node.js (v18.0.0 or higher)

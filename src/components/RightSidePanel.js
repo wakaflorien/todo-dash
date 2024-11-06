@@ -18,7 +18,7 @@ function RightSidePanel(props) {
           props.currentTheme === "light"
             ? "bg-white border-l"
             : "bg-night border-l border-night"
-        } w-full md:w-[300px] h-content sm:h-screen  shadow-sm p-4 space-y-4 absolute right-0 z-50 hidden md:block`}
+        } w-full md:w-[300px] h-fit  shadow-sm p-4 space-y-4 absolute right-0 z-50 hidden md:block`}
       >
         {/* Right sidebar panel */}
         <div className="flex flex-col gap-4">
