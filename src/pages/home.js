@@ -4,7 +4,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import {
   AdjustmentsHorizontalIcon,
-  ArrowPathIcon,
   Bars3BottomLeftIcon,
   ChevronDownIcon,
   ChevronRightIcon,

@@ -1,18 +1,13 @@
 import {
   AcademicCapIcon,
   BellIcon,
-  ChevronRightIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import React from "react";
-import { useTranslation } from "react-i18next";
-import UserGroupBlend from "./UserGroupBlend";
 import ThemeSwitcher from "./ThemeSwitcher";
 import LanguageSwitcher from "./LanguageSwitcher";
-import Notification from "./Notification";
 
 function SmallNav(props) {
-  const { t } = useTranslation();
   return (
     <div
       className={`${
