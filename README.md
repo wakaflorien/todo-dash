@@ -4,7 +4,7 @@ Single page manage daily todo dashboard UI/UX
 
 ## **Coverage**
 
-[![codecov](https://codecov.io/github/wakaflorien/todo-dash/graph/badge.svg?token=YILKS0Q33Y)](https://codecov.io/github/wakaflorien/todo-dash)
+[![codecov](https://codecov.io/github/wakaflorien/todo-dash/branch/ft-mobile-nav/graph/badge.svg?token=YILKS0Q33Y)](https://codecov.io/github/wakaflorien/todo-dash)
 
 ## **Prerequisites**
 
